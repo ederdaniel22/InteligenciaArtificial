@@ -1,0 +1,15 @@
+{
+  "name": "alura-ia-workspace",
+  "private": true,
+  "scripts": {
+    "dev:web": "pnpm --filter web dev",
+    "build:web": "pnpm --filter web build",
+    "preview:web": "pnpm --filter web preview",
+    "dev:api": "pnpm --filter api start:dev",
+    "build:api": "pnpm --filter api build",
+    "start:api": "pnpm --filter api start",
+    "test:api": "pnpm --filter api test",
+    "web": "pnpm --filter web",
+    "api": "pnpm --filter api"
+  }
+}

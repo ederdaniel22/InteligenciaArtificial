@@ -34,18 +34,18 @@ export function LoginForm({
   return (
     <form onSubmit={handleSubmit} className="flex w-full max-w-sm flex-col gap-5">
       <header className="mb-2">
-        <h1 className="text-2xl font-semibold text-white">Bem-vindo de volta</h1>
+        <h1 className="text-2xl font-semibold text-white">Login</h1>
         <p className="mt-1 text-sm text-auth-placeholder">
-          Entre na sua conta para continuar
+          Boas-vindas! Faça seu login.
         </p>
       </header>
 
       <FormField
-        label="E-mail"
-        type="email"
+        label="Email ou usuário"
+        type="text"
         name="email"
-        autoComplete="email"
-        placeholder="seu@email.com"
+        autoComplete="username"
+        placeholder="usuario123"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         required
@@ -78,28 +78,35 @@ export function LoginForm({
       </div>
 
       <Button type="submit" className="w-full">
-        Entrar
+        Login
         <img src="/login.svg" alt="" aria-hidden="true" className="h-4 w-4" />
       </Button>
 
       <div className="flex items-center gap-3 text-xs text-auth-placeholder">
         <span className="h-px flex-1 bg-auth-border" />
-        ou
+        ou entre com outras contas
         <span className="h-px flex-1 bg-auth-border" />
       </div>
 
-      <div className="flex flex-col gap-3">
-        <SocialButton
-          icon="/Google.png"
-          label="Entrar com Google"
-          onClick={onGoogleLogin}
-        />
+      <div className="grid grid-cols-2 gap-3">
         <SocialButton
           icon="/Github.png"
-          label="Entrar com GitHub"
+          label="Github"
           onClick={onGithubLogin}
         />
+        <SocialButton
+          icon="/Google.png"
+          label="Gmail"
+          onClick={onGoogleLogin}
+        />
       </div>
+
+      <p className="text-center text-sm text-auth-placeholder">
+        Ainda não tem conta?{' '}
+        <a href="/signup" className="font-medium text-auth-accent hover:underline">
+          Crie seu cadastro
+        </a>
+      </p>
     </form>
   )
 }

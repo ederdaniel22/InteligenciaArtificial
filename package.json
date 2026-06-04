@@ -9,6 +9,7 @@
     "build:api": "pnpm --filter api build",
     "start:api": "pnpm --filter api start",
     "test:api": "pnpm --filter api test",
+    "test:web": "pnpm --filter web test:run",
     "web": "pnpm --filter web",
     "api": "pnpm --filter api"
   }

@@ -1,3 +1,15 @@
+@import "tailwindcss";
+
+/* Design tokens da autenticação (login/cadastro) — derivados do mockup Login2.svg */
+@theme {
+  --color-auth-bg: #00090e;
+  --color-auth-card: #171d1f;
+  --color-auth-accent: #81fe88;
+  --color-auth-placeholder: #888888;
+  --color-auth-field: #1f2629;
+  --color-auth-border: #2e3a3d;
+}
+
 :root {
   --text: #6b6375;
   --text-h: #08060d;
@@ -51,15 +63,7 @@
 }
 
 #root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
   min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
 }
 
 body {

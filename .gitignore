@@ -2,6 +2,7 @@
 .claude/
 .sixth/
 .venv/
+.env/
 
 # dependencies
 node_modules/

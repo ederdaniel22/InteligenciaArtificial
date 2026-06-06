@@ -34,8 +34,8 @@ export function LoginForm({
   return (
     <form onSubmit={handleSubmit} className="flex w-full max-w-sm flex-col gap-5">
       <header className="mb-2">
-        <h1 className="text-2xl font-semibold text-white">Login</h1>
-        <p className="mt-1 text-sm text-auth-placeholder">
+        <h1 className="text-2xl font-semibold text-offwhite">Login</h1>
+        <p className="mt-1 text-sm text-cinza-medio">
           Boas-vindas! Faça seu login.
         </p>
       </header>
@@ -71,7 +71,7 @@ export function LoginForm({
         />
         <a
           href="/forgot-password"
-          className="text-sm text-auth-accent hover:underline"
+          className="text-sm text-verde-destaque hover:underline"
         >
           Esqueci a senha
         </a>
@@ -79,13 +79,22 @@ export function LoginForm({
 
       <Button type="submit" className="w-full">
         Login
-        <img src="/login.svg" alt="" aria-hidden="true" className="h-4 w-4" />
+        <img
+          src="/login.svg"
+          alt=""
+          aria-hidden="true"
+          width={16}
+          height={16}
+          loading="lazy"
+          decoding="async"
+          className="h-4 w-4"
+        />
       </Button>
 
-      <div className="flex items-center gap-3 text-xs text-auth-placeholder">
-        <span className="h-px flex-1 bg-auth-border" />
+      <div className="flex items-center gap-3 text-xs text-cinza-medio">
+        <span className="h-px flex-1 bg-verde-petroleo" />
         ou entre com outras contas
-        <span className="h-px flex-1 bg-auth-border" />
+        <span className="h-px flex-1 bg-verde-petroleo" />
       </div>
 
       <div className="grid grid-cols-2 gap-3">
@@ -101,9 +110,9 @@ export function LoginForm({
         />
       </div>
 
-      <p className="text-center text-sm text-auth-placeholder">
+      <p className="text-center text-sm text-cinza-medio">
         Ainda não tem conta?{' '}
-        <a href="/signup" className="font-medium text-auth-accent hover:underline">
+        <a href="/signup" className="font-medium text-verde-destaque hover:underline">
           Crie seu cadastro
         </a>
       </p>

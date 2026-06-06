@@ -8,5 +8,7 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     setupFiles: './src/test/setup.ts',
+    // `e2e/` roda no Playwright (navegador real), não no Vitest.
+    exclude: ['**/node_modules/**', '**/dist/**', 'e2e/**'],
   },
 })

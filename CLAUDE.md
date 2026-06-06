@@ -27,11 +27,8 @@ pnpm build:web
 ```bash
 pnpm test:api              # API unit tests (Jest)
 pnpm test:web              # Web unit tests (Vitest, run once)
-pnpm web -- test           # Web tests in watch mode
+pnpm web -- test           # Web tests in watch mode1
 pnpm web -- test:ui        # Web tests with Vitest UI
-pnpm api -- test --testPathPattern=app  # single API test file by pattern
-pnpm api -- test:e2e       # API end-to-end tests
-pnpm api -- test:cov       # API coverage report
 ```
 
 ### Lint & format (API)

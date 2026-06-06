@@ -14,8 +14,8 @@ export interface AuthTemplateProps {
  */
 export function AuthTemplate({ banner, children }: AuthTemplateProps) {
   return (
-    <div className="flex min-h-svh items-center justify-center bg-auth-bg p-4">
-      <div className="grid w-full max-w-5xl overflow-hidden rounded-3xl bg-auth-card shadow-2xl md:grid-cols-2">
+    <div className="flex min-h-svh items-center justify-center bg-grafite p-4">
+      <div className="grid w-full max-w-5xl overflow-hidden rounded-3xl bg-cinza-escuro shadow-2xl md:grid-cols-2">
         <div className="hidden md:block">{banner}</div>
         <div className="flex items-center justify-center p-8 md:p-12">
           {children}

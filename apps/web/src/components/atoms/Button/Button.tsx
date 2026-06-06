@@ -12,13 +12,13 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const base =
   'inline-flex items-center justify-center gap-2 rounded-lg px-4 py-3 text-sm font-medium ' +
-  'transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-auth-accent ' +
+  'transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-verde-destaque ' +
   'disabled:cursor-not-allowed disabled:opacity-60'
 
 const variants: Record<ButtonVariant, string> = {
-  primary: 'bg-auth-accent text-auth-bg hover:brightness-95',
+  primary: 'bg-verde-destaque text-grafite hover:brightness-95',
   social:
-    'border border-auth-border bg-auth-field text-white hover:border-auth-accent/60',
+    'border border-verde-petroleo bg-verde-petroleo text-offwhite hover:border-verde-destaque/60',
 }
 
 export function Button({

@@ -23,7 +23,7 @@ export function FormField({ label, error, ...inputProps }: FormFieldProps) {
         {...inputProps}
       />
       {error && (
-        <p id={errorId} className="mt-1 text-xs text-red-400">
+        <p id={errorId} className="mt-1 text-xs text-vermelho">
           {error}
         </p>
       )}

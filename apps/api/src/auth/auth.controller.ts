@@ -18,7 +18,7 @@ import {
 } from '@nestjs/swagger';
 import { Request } from 'express';
 import { AuthService, JwtPayload } from './auth.service';
-import { AuthGuard } from './auth.guard';
+import { JwtAuthGuard } from './auth.guard';
 import { SignupDto } from './dto/signup.dto';
 import { LoginDto } from './dto/login.dto';
 import { AuthResponseDto } from './dto/auth-response.dto';
@@ -50,7 +50,7 @@ export class AuthController {
   }
 
   @Get('profile')
-  @UseGuards(AuthGuard)
+  @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Obter os dados do usuário autenticado' })
   @ApiOkResponse({ type: ProfileResponseDto })

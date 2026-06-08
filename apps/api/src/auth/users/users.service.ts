@@ -41,4 +41,8 @@ export class UsersService {
   findById(id: number): User | undefined {
     return this.users.find((user) => user.id === id);
   }
+
+  findAll(): User[] {
+    return this.users;
+  }
 }

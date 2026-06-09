@@ -55,7 +55,7 @@ export class AuthController {
   @ApiOperation({ summary: 'Obter os dados do usuário autenticado' })
   @ApiOkResponse({ type: ProfileResponseDto })
   @ApiUnauthorizedResponse({ description: 'Token ausente ou inválido.' })
-  getProfile(@Req() req: AuthenticatedRequest): ProfileResponseDto {
+  getProfile(@Req() req: AuthenticatedRequest): Promise<ProfileResponseDto> {
     return this.authService.getProfile(req.user.sub);
   }
 }

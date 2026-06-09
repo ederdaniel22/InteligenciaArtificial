@@ -28,12 +28,12 @@ export class AuthService {
   ) {}
 
   async register(dto: SignupDto): Promise<AuthResponseDto> {
-    if (this.usersService.findByEmail(dto.email)) {
+    if (await this.usersService.findByEmail(dto.email)) {
       throw new ConflictException('Este email já está cadastrado.');
     }
 
     const passwordHash = await bcrypt.hash(dto.password, SALT_ROUNDS);
-    this.usersService.create({
+    await this.usersService.create({
       name: dto.name,
       email: dto.email,
       passwordHash,
@@ -43,7 +43,7 @@ export class AuthService {
   }
 
   async login(dto: LoginDto): Promise<AuthResponseDto> {
-    const user = this.usersService.findByEmail(dto.email);
+    const user = await this.usersService.findByEmail(dto.email);
     const passwordMatches =
       user && (await bcrypt.compare(dto.password, user.passwordHash));
 
@@ -61,8 +61,8 @@ export class AuthService {
     return { message: 'Login realizado com sucesso.', token };
   }
 
-  getProfile(userId: number): ProfileResponseDto {
-    const user = this.usersService.findById(userId);
+  async getProfile(userId: number): Promise<ProfileResponseDto> {
+    const user = await this.usersService.findById(userId);
     if (!user) {
       throw new UnauthorizedException();
     }

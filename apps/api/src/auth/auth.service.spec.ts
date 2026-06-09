@@ -3,6 +3,39 @@ import { JwtService } from '@nestjs/jwt';
 import { ConflictException, UnauthorizedException } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { UsersService } from './users/users.service';
+import { User } from './users/user.entity';
+
+/**
+ * Mock em memória da UsersService (que em produção usa o repositório do TypeORM),
+ * reproduzindo a normalização de email e a geração de id.
+ */
+function createUsersServiceMock(): Pick<
+  UsersService,
+  'create' | 'findByEmail' | 'findById'
+> {
+  const users: User[] = [];
+  let seq = 1;
+  const normalize = (email: string) => email.trim().toLowerCase();
+
+  return {
+    create: jest.fn(({ name, email, passwordHash }) => {
+      const user: User = {
+        id: seq++,
+        name: name.trim(),
+        email: normalize(email),
+        passwordHash,
+      };
+      users.push(user);
+      return Promise.resolve(user);
+    }),
+    findByEmail: jest.fn((email: string) =>
+      Promise.resolve(users.find((u) => u.email === normalize(email)) ?? null),
+    ),
+    findById: jest.fn((id: number) =>
+      Promise.resolve(users.find((u) => u.id === id) ?? null),
+    ),
+  };
+}
 
 describe('AuthService', () => {
   let authService: AuthService;
@@ -13,7 +46,7 @@ describe('AuthService', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         AuthService,
-        UsersService,
+        { provide: UsersService, useValue: createUsersServiceMock() },
         { provide: JwtService, useValue: { signAsync } },
       ],
     }).compile();

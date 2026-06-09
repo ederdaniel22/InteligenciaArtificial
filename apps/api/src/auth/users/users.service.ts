@@ -1,14 +1,17 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { User } from './user.entity';
 
 /**
- * Armazenamento de usuários em memória (apenas para fins didáticos — sem ORM/DB).
- * Os dados são perdidos a cada restart do servidor.
+ * Acesso aos usuários persistidos no PostgreSQL (via repositório do TypeORM).
  */
 @Injectable()
 export class UsersService {
-  private readonly users: User[] = [];
-  private seq = 1;
+  constructor(
+    @InjectRepository(User)
+    private readonly repo: Repository<User>,
+  ) {}
 
   private static normalizeEmail(email: string): string {
     return email.trim().toLowerCase();
@@ -22,27 +25,25 @@ export class UsersService {
     name: string;
     email: string;
     passwordHash: string;
-  }): User {
-    const user: User = {
-      id: this.seq++,
+  }): Promise<User> {
+    const user = this.repo.create({
       name: name.trim(),
       email: UsersService.normalizeEmail(email),
       passwordHash,
-    };
-    this.users.push(user);
-    return user;
+    });
+    return this.repo.save(user);
   }
 
-  findByEmail(email: string): User | undefined {
+  findByEmail(email: string): Promise<User | null> {
     const normalized = UsersService.normalizeEmail(email);
-    return this.users.find((user) => user.email === normalized);
+    return this.repo.findOne({ where: { email: normalized } });
   }
 
-  findById(id: number): User | undefined {
-    return this.users.find((user) => user.id === id);
+  findById(id: number): Promise<User | null> {
+    return this.repo.findOne({ where: { id } });
   }
 
-  findAll(): User[] {
-    return this.users;
+  findAll(): Promise<User[]> {
+    return this.repo.find();
   }
 }

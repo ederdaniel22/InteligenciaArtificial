@@ -11,8 +11,9 @@ export class UsersController {
   @Get()
   @ApiOperation({ summary: 'Listar os usuários cadastrados (sem a senha)' })
   @ApiOkResponse({ type: ProfileResponseDto, isArray: true })
-  findAll(): ProfileResponseDto[] {
-    return this.usersService.findAll().map((user) => ({
+  async findAll(): Promise<ProfileResponseDto[]> {
+    const users = await this.usersService.findAll();
+    return users.map((user) => ({
       id: user.id,
       name: user.name,
       email: user.email,

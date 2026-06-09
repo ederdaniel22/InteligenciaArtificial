@@ -92,6 +92,36 @@ Tailwind is loaded via the `@tailwindcss/vite` plugin (no `tailwind.config.*` fi
 
 Use Tailwind utility classes directly on JSX elements. Custom design tokens go in the `@theme` block inside `index.css`.
 
+### Colors — use palette tokens, never raw values
+
+Never hard-code colors in `className` (no hex like `text-[#81fe88]`, and avoid Tailwind's
+default palette like `text-white` / `text-gray-300` / `text-red-400`). All colors come from the
+project palette declared as `--color-*` tokens in the `@theme` block of `index.css`. The palette
+mirrors the Figma design system; extend the theme rather than reaching for raw values.
+
+| Token | Hex | Use for |
+|---|---|---|
+| `grafite` | `#00090E` | page background |
+| `cinza-escuro` | `#171D1F` | card / surface |
+| `verde-petroleo` | `#132E35` | inputs, social button, borders & dividers |
+| `cinza-medio` | `#888888` | secondary text & placeholders |
+| `offwhite` | `#E1E1E1` | primary text & labels |
+| `verde-destaque` | `#81FE88` | accent: primary button & links |
+| `vermelho` | `#F87171` | supplementary — validation/error only (not in the Figma palette) |
+
+- Reference tokens via utilities: `bg-grafite`, `text-offwhite`, `border-verde-petroleo`,
+  `ring-verde-destaque`, `accent-verde-destaque`, etc.
+- Need a new color? Add a `--color-<name>` token to `@theme` (kebab-case, descriptive color
+  name matching the Figma variable) and use it — don't inline the hex.
+- Pull canonical values from Figma via the MCP `get_variable_defs` tool before inventing a color.
+
+### Font sizes — nearest Tailwind token, no custom sizes
+
+Use Tailwind's size scale (`text-xs`, `text-sm`, `text-base`, `text-lg`, `text-xl`, `text-2xl`…).
+Never use arbitrary sizes (`text-[15px]`). When a Figma value falls between steps, pick the
+**nearest** token instead of customizing (e.g. Figma 12.5px → `text-xs`, 18px → `text-lg`,
+31px → `text-3xl`).
+
 ### Component tests
 
 Every component must have a test file (`*.test.tsx`) covering its essential usage. Tests use **Vitest** + **React Testing Library**:

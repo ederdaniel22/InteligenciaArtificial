@@ -11,7 +11,16 @@ export interface SocialButtonProps extends Omit<ButtonProps, 'variant' | 'childr
 export function SocialButton({ icon, label, ...props }: SocialButtonProps) {
   return (
     <Button variant="social" className="w-full" {...props}>
-      <img src={icon} alt="" aria-hidden="true" className="h-5 w-5" />
+      <img
+        src={icon}
+        alt=""
+        aria-hidden="true"
+        width={20}
+        height={20}
+        loading="lazy"
+        decoding="async"
+        className="h-5 w-5"
+      />
       {label}
     </Button>
   )

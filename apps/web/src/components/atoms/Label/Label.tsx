@@ -7,7 +7,7 @@ export interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
 export function Label({ className = '', children, ...props }: LabelProps) {
   return (
     <label
-      className={'mb-1.5 block text-sm font-medium text-gray-300 ' + className}
+      className={'mb-1.5 block text-sm font-medium text-offwhite ' + className}
       {...props}
     >
       {children}

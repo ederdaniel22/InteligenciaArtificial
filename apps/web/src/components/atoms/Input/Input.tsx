@@ -10,10 +10,10 @@ export function Input({ invalid, className = '', ...props }: InputProps) {
     <input
       aria-invalid={invalid || undefined}
       className={
-        'w-full rounded-md border bg-auth-field px-3 py-2.5 text-sm text-white ' +
-        'placeholder:text-auth-placeholder focus:outline-none focus-visible:ring-2 ' +
-        'focus-visible:ring-auth-accent ' +
-        (invalid ? 'border-red-500 ' : 'border-auth-border ') +
+        'w-full rounded-md border bg-verde-petroleo px-3 py-2.5 text-sm text-offwhite ' +
+        'placeholder:text-cinza-medio focus:outline-none focus-visible:ring-2 ' +
+        'focus-visible:ring-verde-destaque ' +
+        (invalid ? 'border-vermelho ' : 'border-verde-petroleo ') +
         className
       }
       {...props}

@@ -1,22 +1,5 @@
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:3000'
-
-async function post<T>(endpoint: string, body: unknown): Promise<T> {
-  const response = await fetch(endpoint, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(body),
-  })
-
-  const data = await response.json().catch(() => null)
-
-  if (!response.ok) {
-    throw new Error(data?.message ?? response.statusText)
-  }
-
-  return data as T
-}
+import { api } from './api'
+import { clearToken, setToken } from './token'
 
 export interface SignupRequest {
   name: string
@@ -34,10 +17,35 @@ export interface AuthResponse {
   token?: string
 }
 
+export interface ProfileResponse {
+  id: number
+  name: string
+  email: string
+}
+
 export async function signup(values: SignupRequest): Promise<AuthResponse> {
-  return post<AuthResponse>(`${API_BASE_URL}/signup`, values)
+  const { data } = await api.post<AuthResponse>('/signup', values)
+  return data
 }
 
 export async function login(values: LoginRequest): Promise<AuthResponse> {
-  return post<AuthResponse>(`${API_BASE_URL}/login`, values)
+  const { data } = await api.post<AuthResponse>('/login', values)
+  if (data.token) {
+    setToken(data.token)
+  }
+  return data
+}
+
+export async function getProfile(): Promise<ProfileResponse> {
+  const { data } = await api.get<ProfileResponse>('/profile')
+  return data
+}
+
+export async function listUsers(): Promise<ProfileResponse[]> {
+  const { data } = await api.get<ProfileResponse[]>('/users')
+  return data
+}
+
+export function logout(): void {
+  clearToken()
 }
